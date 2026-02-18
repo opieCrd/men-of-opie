@@ -24,33 +24,11 @@
             <li><a href="#productos">Colección</a></li>
         </ul>
         <div class="nav-actions">
-            <button class="btn btn-primary cart-toggle"
-                style="padding: 0.5rem 1rem; font-size: 0.8rem; position: relative;">
-                🛒 <span id="cart-count">0</span>
-            </button>
-            <a href="#productos" class="btn btn-primary"
-                style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-left: 10px;">Tienda</a>
+            <a href="#productos" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Tienda</a>
         </div>
     </nav>
 
-    <!-- Shopping Cart Drawer -->
-    <div class="cart-drawer" id="cart-drawer">
-        <div class="cart-header">
-            <h3>Tu Carrito</h3>
-            <button class="close-cart">&times;</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <!-- Items injected by JS -->
-            <p class="empty-msg">Tu carrito está vacío.</p>
-        </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-amount">$0.00</span>
-            </div>
-            <button class="btn btn-primary checkout-btn">Finalizar Compra</button>
-        </div>
-    </div>
+
 
     <header class="hero">
         <div class="hero-bg"></div>
@@ -76,25 +54,93 @@
                 acceso anticipado.</p>
         </div>
 
-        <div class="hoodie-grid" id="dynamic-products-grid">
+        <div class="hoodie-grid" style="display: flex; justify-content: center;">
             <!-- Producto: Industrial White v4 -->
-            <div class="card hoodie-card">
+            <div class="card hoodie-card" style="max-width: 400px; width: 100%;">
                 <div class="hoodie-img-container">
                     <img src="img/tshirt_white_4.png" class="card-img-src" alt="Polo OPIE Industrial White v4">
                 </div>
                 <div class="card-content">
                     <h3 class="card-title hoodie-title">Polo OPIE Industrial v4</h3>
                     <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
-                    <div class="shopify-buy-button-container" data-shopify-id="DEFAULT_ID">
-                        <button class="btn btn-hoodie-add btn-add-to-cart">Añadir al Carrito</button>
-                    </div>
+                    <div id="shopify-product-button"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Shopify SDK -->
-    <script src="https://sdks.shopifycloud.com/buy-button/latest/buy-button-storefront.min.js"></script>
+    <!-- Shopify Buy Button -->
+    <script type="text/javascript">
+        (function () {
+            var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+            if (window.ShopifyBuy) {
+                if (window.ShopifyBuy.UI) { ShopifyBuyInit(); } else { loadScript(); }
+            } else { loadScript(); }
+            function loadScript() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = scriptURL;
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+                script.onload = ShopifyBuyInit;
+            }
+            function ShopifyBuyInit() {
+                var client = ShopifyBuy.buildClient({
+                    domain: 'tgwn78-t9.myshopify.com',
+                    storefrontAccessToken: '51911686ba2ac362dd822d8f8f7b5255',
+                });
+                ShopifyBuy.UI.onReady(client).then(function (ui) {
+                    ui.createComponent('product', {
+                        id: '10235300085892',
+                        node: document.getElementById('shopify-product-button'),
+                        moneyFormat: 'S/.%20%7B%7Bamount%7D%7D',
+                        options: {
+                            "product": {
+                                "styles": {
+                                    "button": {
+                                        "background-color": "#d4a843",
+                                        ":hover": { "background-color": "#b8912e" },
+                                        ":focus": { "background-color": "#b8912e" },
+                                        "font-family": "Inter, sans-serif",
+                                        "font-weight": "700",
+                                        "font-size": "16px",
+                                        "padding": "14px 30px",
+                                        "border-radius": "4px",
+                                        "letter-spacing": "1px"
+                                    }
+                                },
+                                "buttonDestination": "checkout",
+                                "contents": {
+                                    "img": false,
+                                    "title": false,
+                                    "price": false
+                                },
+                                "text": { "button": "COMPRAR AHORA" }
+                            },
+                            "cart": {
+                                "styles": {
+                                    "button": {
+                                        "background-color": "#d4a843",
+                                        ":hover": { "background-color": "#b8912e" },
+                                        ":focus": { "background-color": "#b8912e" }
+                                    }
+                                },
+                                "text": { "total": "Subtotal", "button": "Pagar" }
+                            },
+                            "toggle": {
+                                "styles": {
+                                    "toggle": {
+                                        "background-color": "#d4a843",
+                                        ":hover": { "background-color": "#b8912e" },
+                                        ":focus": { "background-color": "#b8912e" }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            }
+        })();
+    </script>
 
 
     </main>
