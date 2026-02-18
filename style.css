@@ -274,7 +274,6 @@ nav.nav-scrolled {
   width: auto;
   object-fit: contain;
   filter: brightness(1.2);
-  /* Opcional: para que resalte más en fondo oscuro */
 }
 
 .nav-links {
@@ -289,13 +288,11 @@ nav.nav-scrolled {
   color: var(--text-main);
   text-decoration: none;
   font-weight: 950;
-  /* Máximo peso para el look industrial */
   font-size: 0.85rem;
   text-transform: uppercase;
   transition: var(--transition);
   opacity: 0.85;
   letter-spacing: -0.5px;
-  /* Las letras más juntas como en Mechanix */
 }
 
 .nav-links a:hover {
@@ -520,9 +517,7 @@ nav.nav-scrolled {
   transform: scale(1.05);
 }
 
-/* Infinite Carousel Styles (Already defined above) */
-
-/* Hoodie Collection Styles (Reference Style) */
+/* Hoodie Collection Styles */
 .hoodie-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -550,7 +545,6 @@ nav.nav-scrolled {
   align-items: center;
   justify-content: center;
   border-radius: 0;
-  /* Aspecto más industrial y menos suavizado */
   overflow: hidden;
   margin-bottom: 1rem;
   border: 1px solid var(--border-glass);
@@ -560,7 +554,6 @@ nav.nav-scrolled {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Hace que la imagen llene el espacio sin dejar bordes */
   transition: var(--transition);
 }
 
@@ -572,7 +565,6 @@ nav.nav-scrolled {
   font-size: 0.95rem !important;
   font-weight: 500 !important;
   color: #fff !important;
-  /* Adaptando al tema oscuro manteniendo la sobriedad */
   margin-bottom: 0.7rem !important;
   text-transform: none !important;
   letter-spacing: 0 !important;
@@ -657,14 +649,21 @@ nav.nav-scrolled {
   color: #000;
 }
 
+/* Media Queries para responsive */
 @media (max-width: 1024px) {
   .hoodie-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
 }
 
 @media (max-width: 600px) {
   .hoodie-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2rem !important;
   }
 }
