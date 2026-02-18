@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPIE | Ropa de Trabajo de Alto Rendimiento</title>
+    <meta name="description"
+        content="Ropa de trabajo técnica y táctica inspirada en la durabilidad y el rendimiento. Diseñada para los trabajos más duros.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">
+            <img src="img/logo1.1.png" alt="OPIE Logo" class="logo-img">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#productos">Colección</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn btn-primary cart-toggle"
+                style="padding: 0.5rem 1rem; font-size: 0.8rem; position: relative;">
+                🛒 <span id="cart-count">0</span>
+            </button>
+            <a href="#productos" class="btn btn-primary"
+                style="padding: 0.5rem 1rem; font-size: 0.8rem; margin-left: 10px;">Tienda</a>
+        </div>
+    </nav>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items injected by JS -->
+            <p class="empty-msg">Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-amount">$0.00</span>
+            </div>
+            <button class="btn btn-primary checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>LA HERRAMIENTA QUE SE LLEVA PUESTA</h1>
+            <p>Diseño industrial avanzado para profesionales que exigen lo máximo de su equipo. Durabilidad sin
+                compromisos.</p>
+            <div class="hero-btns">
+                <a href="#productos" class="btn btn-primary">Ver Colección</a>
+            </div>
+        </div>
+    </header>
+
+
+
+
+
+    <section id="productos" class="section">
+        <div class="section-title" style="display: block; text-align: center; margin-bottom: 4rem;">
+            <h2 style="font-size: 3rem; margin-bottom: 0.5rem; letter-spacing: -1px;">PRÓXIMOS LANZAMIENTOS</h2>
+            <div style="width: 50px; height: 3px; background: var(--primary); margin: 0.5rem auto 1.5rem;"></div>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Modelos exclusivos de cada mes. Suscríbete para
+                acceso anticipado.</p>
+        </div>
+
+        <div class="hoodie-grid" id="dynamic-products-grid">
+            <!-- Producto 1: Industrial White v1 -->
+            <div class="card hoodie-card">
+                <div class="hoodie-img-container">
+                    <img src="img/tshirt_white_1.png" class="card-img-src" alt="Polo OPIE Industrial White v1">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title hoodie-title">Polo OPIE Industrial v1</h3>
+                    <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
+                    <button class="btn btn-hoodie-add btn-add-to-cart">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 2: Industrial White v2 -->
+            <div class="card hoodie-card">
+                <div class="hoodie-img-container">
+                    <img src="img/tshirt_white_2.png" class="card-img-src" alt="Polo OPIE Industrial White v2">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title hoodie-title">Polo OPIE Industrial v2</h3>
+                    <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
+                    <button class="btn btn-hoodie-add btn-add-to-cart">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 3: Industrial White v3 -->
+            <div class="card hoodie-card">
+                <div class="hoodie-img-container">
+                    <img src="img/tshirt_white_3.png" class="card-img-src" alt="Polo OPIE Industrial White v3">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title hoodie-title">Polo OPIE Industrial v3</h3>
+                    <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
+                    <button class="btn btn-hoodie-add btn-add-to-cart">Añadir al Carrito</button>
+                </div>
+            </div>
+
+            <!-- Producto 4: Industrial White v4 -->
+            <div class="card hoodie-card">
+                <div class="hoodie-img-container">
+                    <img src="img/tshirt_white_4.png" class="card-img-src" alt="Polo OPIE Industrial White v4">
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title hoodie-title">Polo OPIE Industrial v4</h3>
+                    <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
+                    <div class="shopify-buy-button-container" data-shopify-id="DEFAULT_ID">
+                        <button class="btn btn-hoodie-add btn-add-to-cart">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Collections -->
+    <section id="productos" class="section">
+        <div class="container">
+            <h2 class="section-title">Próximos Lanzamientos</h2>
+            <div id="dynamic-products-grid" class="product-grid">
+                <!-- Los productos se inyectarán aquí con soporte para Shopify -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopify SDK -->
+    <script src="https://sdks.shopifycloud.com/buy-button/latest/buy-button-storefront.min.js"></script>
+
+
+    </main>
+
+    <footer style="padding: 5rem 5%; border-top: 1px solid var(--border-glass);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem;">
+            <div>
+                <div class="logo">
+                    <img src="img/logo1.1.png" alt="OPIE Logo" class="logo-img" style="max-width: 150px;">
+                </div>
+                <p style="color: var(--text-muted); margin-top: 1rem;">La confianza de los profesionales en cada fibra.
+                </p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; text-transform: uppercase;">Soporte</h4>
+                <ul style="list-style: none; color: var(--text-muted); display: grid; gap: 0.5rem;">
+                    <li>Envíos</li>
+                    <li>Devoluciones</li>
+                    <li>Guía de tallas</li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 1.5rem; text-transform: uppercase;">Newsletter</h4>
+                <form id="newsletter-form" style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Tu email" required
+                        style="background: var(--bg-card); border: 1px solid var(--border-glass); padding: 0.8rem; color: #fff; border-radius: 4px; flex: 1;">
+                    <button type="submit" class="btn btn-primary" style="padding: 0 1rem;">Ok</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

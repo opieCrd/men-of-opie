@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPIE Admin | Gestión de Lanzamientos</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border-glass);
+        }
+
+        .admin-nav {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 1rem;
+        }
+
+        .admin-nav button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .admin-nav button.active {
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-glass);
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .product-list {
+            margin-top: 2rem;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        #login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subscriber-tag {
+            background: var(--primary);
+            color: #000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body style="background: var(--bg-dark);">
+
+    <div id="login-overlay">
+        <div class="admin-container" style="max-width: 400px; text-align: center;">
+            <img src="img/logo1.1.png" alt="OPIE" style="height: 50px; margin-bottom: 2rem;">
+            <h2>Acceso Administrador</h2>
+            <div class="form-group" style="margin-top: 2rem;">
+                <input type="password" id="admin-pass" placeholder="Contraseña">
+            </div>
+            <button class="btn btn-primary" id="login-btn" style="width: 100%;">Entrar</button>
+        </div>
+    </div>
+
+    <div class="admin-container">
+        <div class="admin-nav">
+            <button id="nav-products" class="active">Productos</button>
+            <button id="nav-subscribers">Suscriptores</button>
+            <button id="nav-settings">Ajustes</button>
+            <a href="index.html"
+                style="margin-left: auto; color: var(--text-muted); text-decoration: none; font-size: 0.8rem;">Volver al
+                sitio</a>
+        </div>
+
+        <div id="section-products">
+            <h3>Subir Nuevo Modelo</h3>
+            <form id="product-form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label>Nombre del Producto</label>
+                        <input type="text" id="p-name" placeholder="Ej: Hoodie Mayhem Ultra" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio (S/.)</label>
+                        <input type="number" id="p-price" placeholder="350.00" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Imagen del Producto</label>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <input type="file" id="p-file" accept="image/*" style="flex: 1;">
+                        <span style="color: var(--text-muted); font-size: 0.8rem;">o</span>
+                        <input type="text" id="p-img" placeholder="https://link-a-tu-imagen.jpg" style="flex: 1;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select id="p-category">
+                        <option value="Hoodie">Hoodie</option>
+                        <option value="T-Shirt">T-Shirt</option>
+                        <option value="Accesorio">Accesorio</option>
+                        <option value="Edición Limitada">Edición Limitada</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>ID de Producto Shopify (Opcional)</label>
+                    <input type="text" id="p-shopify" placeholder="Ej: 7892345678123">
+                    <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem;">
+                        Si usas Shopify Buy Button, pega aquí el ID del producto.
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-primary">Publicar Modelo</button>
+            </form>
+
+            <div class="product-list">
+                <h3>Modelos Actuales</h3>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-product-tbody">
+                        <!-- JS injected -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="section-subscribers" style="display: none;">
+            <h3>Lista de Suscriptores</h3>
+            <div id="subscriber-list" style="margin-top: 1rem;">
+                <!-- JS injected -->
+            </div>
+        </div>
+
+        <div id="section-settings" style="display: none;">
+            <h3>Ajustes de Tienda (Shopify)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
+                <div class="form-group">
+                    <label>Dominio .myshopify.com</label>
+                    <input type="text" id="shopify-domain" placeholder="menofopie.myshopify.com">
+                </div>
+                <div class="form-group">
+                    <label>Storefront Access Token</label>
+                    <input type="password" id="shopify-token" placeholder="Tu token de Shopify">
+                </div>
+            </div>
+
+            <h3>Ajustes Estéticos</h3>
+            <div class="form-group" style="margin-top: 1rem;">
+                <label>Imagen de Fondo (Hero)</label>
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <input type="file" id="hero-file" accept="image/*">
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">
+                        Sube una foto desde tu PC (Recomendado: 1920x1080)
+                    </p>
+                    <span style="color: var(--text-muted); font-size: 0.8rem; text-align: center;">O PEGA UNA URL</span>
+                    <input type="text" id="hero-img-url" placeholder="https://link-a-tu-foto.jpg">
+                </div>
+            </div>
+            <button id="save-settings-btn" class="btn btn-primary">Guardar Ajustes</button>
+        </div>
+    </div>
+
+    <script>
+        // Security logic (Basic)
+        const PASS = "opie2026";
+        const loginBtn = document.getElementById('login-btn');
+        const loginOverlay = document.getElementById('login-overlay');
+        const passInput = document.getElementById('admin-pass');
+
+        loginBtn.addEventListener('click', () => {
+            if (passInput.value === PASS) {
+                loginOverlay.style.display = 'none';
+            } else {
+                alert("Contraseña incorrecta");
+            }
+        });
+
+        // Navigation logic
+        const btnProd = document.getElementById('nav-products');
+        const btnSubs = document.getElementById('nav-subscribers');
+        const btnSett = document.getElementById('nav-settings');
+        const secProd = document.getElementById('section-products');
+        const secSubs = document.getElementById('section-subscribers');
+        const secSett = document.getElementById('section-settings');
+
+        btnProd.addEventListener('click', () => {
+            setActiveNav(btnProd);
+            showSection(secProd);
+        });
+
+        btnSubs.addEventListener('click', () => {
+            setActiveNav(btnSubs);
+            showSection(secSubs);
+            renderSubscribers();
+        });
+
+        btnSett.addEventListener('click', () => {
+            setActiveNav(btnSett);
+            showSection(secSett);
+            // Load current settings
+            document.getElementById('hero-img-url').value = localStorage.getItem('opie-hero-bg') || '';
+            document.getElementById('shopify-domain').value = localStorage.getItem('opie-shopify-domain') || '';
+            document.getElementById('shopify-token').value = localStorage.getItem('opie-shopify-token') || '';
+        });
+
+        function setActiveNav(btn) {
+            [btnProd, btnSubs, btnSett].forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function showSection(sec) {
+            [secProd, secSubs, secSett].forEach(s => s.style.display = 'none');
+            sec.style.display = 'block';
+        }
+
+        // Product Logic
+        const productForm = document.getElementById('product-form');
+        const productTbody = document.getElementById('admin-product-tbody');
+
+        function getProducts() {
+            return JSON.parse(localStorage.getItem('opie-custom-products')) || [];
+        }
+
+        function saveProducts(prods) {
+            localStorage.setItem('opie-custom-products', JSON.stringify(prods));
+        }
+
+        productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            let imgSrc = document.getElementById('p-img').value;
+            const fileInput = document.getElementById('p-file');
+
+            // Si hay un archivo seleccionado, lo convertimos a Base64
+            if (fileInput.files && fileInput.files[0]) {
+                imgSrc = await toBase64(fileInput.files[0]);
+            }
+
+            if (!imgSrc) {
+                alert("Por favor selecciona una imagen o pega una URL.");
+                return;
+            }
+
+            const newProd = {
+                id: Date.now(),
+                name: document.getElementById('p-name').value,
+                price: parseFloat(document.getElementById('p-price').value),
+                img: imgSrc,
+                category: document.getElementById('p-category').value,
+                shopifyId: document.getElementById('p-shopify').value
+            };
+
+            const products = getProducts();
+            products.push(newProd);
+            saveProducts(products);
+            productForm.reset();
+            renderAdminProducts();
+            alert("Producto subido!");
+        });
+
+        function renderAdminProducts() {
+            const products = getProducts();
+            productTbody.innerHTML = '';
+            products.forEach(p => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><img src="${p.img}" style="height: 40px; width: 40px; object-fit: cover;"></td>
+                    <td>${p.name}</td>
+                    <td>S/. ${p.price.toFixed(2)}</td>
+                    <td><button onclick="deleteProduct(${p.id})" style="background: none; border: none; color: #ff4444; cursor: pointer;">Eliminar</button></td>
+                `;
+                productTbody.appendChild(tr);
+            });
+        }
+
+        window.deleteProduct = (id) => {
+            let products = getProducts();
+            products = products.filter(p => p.id !== id);
+            saveProducts(products);
+            renderAdminProducts();
+        };
+
+        // Subscriber Logic
+        function getSubscribers() {
+            return JSON.parse(localStorage.getItem('opie-subscribers')) || [];
+        }
+
+        function renderSubscribers() {
+            const subs = getSubscribers();
+            const list = document.getElementById('subscriber-list');
+            list.innerHTML = '';
+            if (subs.length === 0) {
+                list.innerHTML = '<p>No hay suscriptores registrados aún.</p>';
+                return;
+            }
+            subs.forEach(email => {
+                const span = document.createElement('span');
+                span.className = 'subscriber-tag';
+                span.textContent = email;
+                list.appendChild(span);
+            });
+        }
+
+        // Settings Logic
+        const saveSettingsBtn = document.getElementById('save-settings-btn');
+        saveSettingsBtn.addEventListener('click', async () => {
+            let url = document.getElementById('hero-img-url').value;
+            const heroFile = document.getElementById('hero-file');
+
+            const shopDomain = document.getElementById('shopify-domain').value;
+            const shopToken = document.getElementById('shopify-token').value;
+
+            if (heroFile.files && heroFile.files[0]) {
+                url = await toBase64(heroFile.files[0]);
+            }
+
+            localStorage.setItem('opie-hero-bg', url);
+            localStorage.setItem('opie-shopify-domain', shopDomain);
+            localStorage.setItem('opie-shopify-token', shopToken);
+
+            alert("Ajustes guardados correctamente.");
+        });
+
+        // Helper: Convert file to Base64
+        function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        renderAdminProducts();
+    </script>
+</body>
+
+</html>
