@@ -96,16 +96,33 @@
                         options: {
                             "product": {
                                 "styles": {
+                                    "product": {
+                                        "text-align": "center"
+                                    },
                                     "button": {
+                                        "background": "linear-gradient(135deg, #d4a843 0%, #f0d078 50%, #d4a843 100%)",
                                         "background-color": "#d4a843",
-                                        ":hover": { "background-color": "#b8912e" },
-                                        ":focus": { "background-color": "#b8912e" },
+                                        ":hover": {
+                                            "background": "linear-gradient(135deg, #e8c060 0%, #f5dc8a 50%, #e8c060 100%)",
+                                            "background-color": "#e8c060",
+                                            "transform": "translateY(-2px)",
+                                            "box-shadow": "0 8px 25px rgba(212, 168, 67, 0.5)"
+                                        },
+                                        ":focus": {
+                                            "background-color": "#b8912e"
+                                        },
                                         "font-family": "Inter, sans-serif",
-                                        "font-weight": "700",
-                                        "font-size": "16px",
-                                        "padding": "14px 30px",
-                                        "border-radius": "4px",
-                                        "letter-spacing": "1px"
+                                        "font-weight": "800",
+                                        "font-size": "18px",
+                                        "padding": "18px 60px",
+                                        "border-radius": "6px",
+                                        "letter-spacing": "3px",
+                                        "text-transform": "uppercase",
+                                        "color": "#1a1a1a",
+                                        "box-shadow": "0 4px 15px rgba(212, 168, 67, 0.3)",
+                                        "transition": "all 0.3s ease",
+                                        "width": "100%",
+                                        "max-width": "350px"
                                     }
                                 },
                                 "buttonDestination": "checkout",
@@ -114,7 +131,7 @@
                                     "title": false,
                                     "price": false
                                 },
-                                "text": { "button": "COMPRAR AHORA" }
+                                "text": { "button": "🛒  COMPRAR AHORA" }
                             },
                             "cart": {
                                 "styles": {
