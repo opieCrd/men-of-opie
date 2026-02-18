@@ -318,7 +318,7 @@ nav.nav-scrolled {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom, rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.8)),
-    url('img/body-wall.png') center/cover no-repeat;
+    url('img/body-wall.webp') center/cover no-repeat;
   z-index: -1;
   transform: scale(1.1);
   animation: zoom-in 20s infinite alternate;
