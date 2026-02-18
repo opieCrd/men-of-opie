@@ -23,9 +23,9 @@
             <li><a href="#">Inicio</a></li>
             <li><a href="#productos">Colección</a></li>
         </ul>
-        <div class="nav-actions">
+        <!-- <div class="nav-actions">
             <a href="#productos" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Tienda</a>
-        </div>
+        </div> -->
     </nav>
 
 
@@ -61,8 +61,15 @@
                     <img src="img/tshirt_white_4.png" class="card-img-src" alt="Polo OPIE Industrial White v4">
                 </div>
                 <div class="card-content">
-                    <h3 class="card-title hoodie-title">Polo OPIE</h3>
-                    <p class="price-tag hoodie-price">S/. 60.00 PEN</p>
+                    <h3 class="card-title hoodie-title">Polo OPIE Industrial v4</h3>
+                    <p class="price-tag hoodie-price">S/. 120.00 PEN</p>
+                    <div class="size-selector">
+                        <span class="size-selector-label">Talla</span>
+                        <button class="size-btn" data-size="S">S</button>
+                        <button class="size-btn active" data-size="M">M</button>
+                        <button class="size-btn" data-size="L">L</button>
+                        <button class="size-btn" data-size="XL">XL</button>
+                    </div>
                     <div id="shopify-product-button"></div>
                 </div>
             </div>
@@ -190,6 +197,16 @@
         </div>
     </footer>
 
+    <script>
+        // Size selector logic
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.classList.contains('out-of-stock')) return;
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+    </script>
     <script src="app.js"></script>
 </body>
 
